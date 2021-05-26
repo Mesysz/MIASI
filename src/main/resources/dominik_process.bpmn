@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1nwzk9n" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+  <bpmn:collaboration id="Collaboration_04i268o">
+    <bpmn:participant id="Participant_1lhi4oc" name="Proces rekrutacji" processRef="Process_miasi" />
+    <bpmn:participant id="Participant_11lkkn6" name="Kandydaci" processRef="Process_01j4pbb" />
+    <bpmn:messageFlow id="Flow_0rjqptf" name="Informacja o terminie spotkań HR" sourceRef="Activity_0lc62c0" targetRef="Participant_11lkkn6" />
+    <bpmn:messageFlow id="Flow_0yeptmn" sourceRef="Participant_11lkkn6" targetRef="Activity_08tml68" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_miasi" isExecutable="true">
+    <bpmn:sequenceFlow id="Flow_0dhg1c2" sourceRef="Activity_1jq1al5" targetRef="Event_08w1mnh" />
+    <bpmn:sequenceFlow id="Flow_1hlayji" sourceRef="Activity_12cbvyc" targetRef="Activity_1jq1al5" />
+    <bpmn:sequenceFlow id="Flow_0i2pokf" sourceRef="StartEvent_1" targetRef="Activity_0lc62c0" />
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0i2pokf</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sendTask id="Activity_0lc62c0" name="Wyznaczanie terminów spotkań HR" camunda:class="com.example.workflow.SchedulingMeetingsHR">
+      <bpmn:incoming>Flow_0i2pokf</bpmn:incoming>
+      <bpmn:outgoing>Flow_0l3seww</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:endEvent id="Event_08w1mnh">
+      <bpmn:incoming>Flow_0dhg1c2</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_1jq1al5" name="Wybierz najlepszych kandydatów" camunda:class="com.example.workflow.PickBestCandidates">
+      <bpmn:incoming>Flow_1hlayji</bpmn:incoming>
+      <bpmn:outgoing>Flow_0dhg1c2</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_12cbvyc" name="Spotkanie HR" camunda:class="com.example.workflow.MeetingHR">
+      <bpmn:incoming>Flow_0ktnudh</bpmn:incoming>
+      <bpmn:outgoing>Flow_1hlayji</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0l3seww" sourceRef="Activity_0lc62c0" targetRef="Activity_08tml68" />
+    <bpmn:sequenceFlow id="Flow_0ktnudh" sourceRef="Activity_08tml68" targetRef="Activity_12cbvyc" />
+    <bpmn:userTask id="Activity_08tml68" name="Wybór terminów przez kandydatów" camunda:assignee="miasi">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="wybor_daty_1" label="wybor daty 1 uczestnik" type="enum">
+            <camunda:value id="termin_1" name="26-05-2021" />
+            <camunda:value id="termin_2" name="27-05-2021" />
+            <camunda:value id="termin_3" name="28-05-2021" />
+          </camunda:formField>
+          <camunda:formField id="wybor_daty_2" label="wybor daty 2 uczestnik" type="enum">
+            <camunda:value id="termin_1" name="26-05-2021" />
+            <camunda:value id="termin_2" name="27-05-2021" />
+            <camunda:value id="termin_3" name="28-05-2021" />
+          </camunda:formField>
+          <camunda:formField id="wybor_daty_3" label="wybor daty 3 uczestnik" type="enum">
+            <camunda:value id="termin_1" name="26-05-2021" />
+            <camunda:value id="termin_2" name="27-05-2021" />
+            <camunda:value id="termin_3" name="28-05-2021" />
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0l3seww</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ktnudh</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmn:process id="Process_01j4pbb" isExecutable="false" />
+  <bpmn:message id="Message_0tewxed" />
+  <bpmn:message id="Message_0rnnnva" />
+  <bpmn:message id="Message_1gid775" name="Odebranie22" />
+  <bpmn:message id="Message_1hl29ya" name="Odebranie11" />
+  <bpmn:message id="Message_18hb54f" name="Message_1lqvqma" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_04i268o">
+      <bpmndi:BPMNShape id="Participant_1lhi4oc_di" bpmnElement="Participant_1lhi4oc" isHorizontal="true">
+        <dc:Bounds x="129" y="357" width="811" height="303" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0ktnudh_di" bpmnElement="Flow_0ktnudh">
+        <di:waypoint x="520" y="500" />
+        <di:waypoint x="560" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0l3seww_di" bpmnElement="Flow_0l3seww">
+        <di:waypoint x="380" y="500" />
+        <di:waypoint x="420" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0i2pokf_di" bpmnElement="Flow_0i2pokf">
+        <di:waypoint x="218" y="500" />
+        <di:waypoint x="280" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1hlayji_di" bpmnElement="Flow_1hlayji">
+        <di:waypoint x="660" y="500" />
+        <di:waypoint x="710" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0dhg1c2_di" bpmnElement="Flow_0dhg1c2">
+        <di:waypoint x="810" y="500" />
+        <di:waypoint x="852" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="182" y="482" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0lc62c0_di" bpmnElement="Activity_0lc62c0">
+        <dc:Bounds x="280" y="460" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_08w1mnh_di" bpmnElement="Event_08w1mnh">
+        <dc:Bounds x="852" y="482" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0127ju7_di" bpmnElement="Activity_1jq1al5">
+        <dc:Bounds x="710" y="460" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ozjcg6_di" bpmnElement="Activity_12cbvyc">
+        <dc:Bounds x="560" y="460" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1wiz0c1_di" bpmnElement="Activity_08tml68">
+        <dc:Bounds x="420" y="460" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_11lkkn6_di" bpmnElement="Participant_11lkkn6" isHorizontal="true">
+        <dc:Bounds x="129" y="80" width="811" height="180" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0rjqptf_di" bpmnElement="Flow_0rjqptf">
+        <di:waypoint x="330" y="460" />
+        <di:waypoint x="330" y="260" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="240" y="280" width="80" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0yeptmn_di" bpmnElement="Flow_0yeptmn">
+        <di:waypoint x="470" y="260" />
+        <di:waypoint x="470" y="460" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
