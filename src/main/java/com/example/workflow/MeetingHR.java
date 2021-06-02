@@ -18,8 +18,8 @@ public class MeetingHR implements JavaDelegate {
 
         logger.info("Selected dates are:");
         logger.info("candidate 1 - " + candidate1PickedDate);
-        logger.info("candidate 1 - " + candidate2PickedDate);
-        logger.info("candidate 1 - " + candidate3PickedDate);
+        logger.info("candidate 2 - " + candidate2PickedDate);
+        logger.info("candidate 3 - " + candidate3PickedDate);
 
         logger.info("Executing meetings HR...");
 

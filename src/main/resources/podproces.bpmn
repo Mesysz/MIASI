@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1hn723j" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+  <bpmn:process id="Process_0yj0ibz" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0xhsr51</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:subProcess id="Activity_00eam0b" name="Zbierz CV">
+      <bpmn:incoming>Flow_0xhsr51</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ujgpda</bpmn:outgoing>
+      <bpmn:startEvent id="Event_1eycusm">
+        <bpmn:outgoing>Flow_1r6x0f4</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:task id="Activity_0a3dzmv" name="Zbierz 3CV">
+        <bpmn:incoming>Flow_1r6x0f4</bpmn:incoming>
+        <bpmn:outgoing>Flow_1a36zpe</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:task id="Activity_11bdkm3" name="Wstępna filtracja">
+        <bpmn:incoming>Flow_1a36zpe</bpmn:incoming>
+        <bpmn:outgoing>Flow_0oge768</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:endEvent id="Event_1muas3g" name="Otrzymano CV">
+        <bpmn:incoming>Flow_0oge768</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_0oge768" sourceRef="Activity_11bdkm3" targetRef="Event_1muas3g" />
+      <bpmn:sequenceFlow id="Flow_1a36zpe" sourceRef="Activity_0a3dzmv" targetRef="Activity_11bdkm3" />
+      <bpmn:sequenceFlow id="Flow_1r6x0f4" sourceRef="Event_1eycusm" targetRef="Activity_0a3dzmv" />
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="Flow_0xhsr51" sourceRef="StartEvent_1" targetRef="Activity_00eam0b" />
+    <bpmn:endEvent id="Event_1me20rs">
+      <bpmn:incoming>Flow_0ujgpda</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0ujgpda" sourceRef="Activity_00eam0b" targetRef="Event_1me20rs" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0yj0ibz">
+      <bpmndi:BPMNEdge id="Flow_0xhsr51_di" bpmnElement="Flow_0xhsr51">
+        <di:waypoint x="215" y="230" />
+        <di:waypoint x="280" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ujgpda_di" bpmnElement="Flow_0ujgpda">
+        <di:waypoint x="890" y="230" />
+        <di:waypoint x="962" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1me20rs_di" bpmnElement="Event_1me20rs">
+        <dc:Bounds x="962" y="212" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="212" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_00eam0b_di" bpmnElement="Activity_00eam0b" isExpanded="true">
+        <dc:Bounds x="280" y="40" width="610" height="380" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1r6x0f4_di" bpmnElement="Flow_1r6x0f4">
+        <di:waypoint x="358" y="230" />
+        <di:waypoint x="420" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1a36zpe_di" bpmnElement="Flow_1a36zpe">
+        <di:waypoint x="520" y="230" />
+        <di:waypoint x="590" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0oge768_di" bpmnElement="Flow_0oge768">
+        <di:waypoint x="690" y="230" />
+        <di:waypoint x="762" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1eycusm_di" bpmnElement="Event_1eycusm">
+        <dc:Bounds x="322" y="212" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0a3dzmv_di" bpmnElement="Activity_0a3dzmv">
+        <dc:Bounds x="420" y="190" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_11bdkm3_di" bpmnElement="Activity_11bdkm3">
+        <dc:Bounds x="590" y="190" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1muas3g_di" bpmnElement="Event_1muas3g">
+        <dc:Bounds x="762" y="212" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="744" y="255" width="73" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
