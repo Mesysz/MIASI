@@ -4,7 +4,7 @@
     <bpmn:participant id="Participant_1lhi4oc" name="Proces rekrutacji" processRef="Process_miasi" />
     <bpmn:participant id="Participant_11lkkn6" name="Kandydaci" processRef="Process_01j4pbb" />
     <bpmn:messageFlow id="Flow_0rjqptf" name="Informacja o terminie spotkań HR" sourceRef="Activity_0lc62c0" targetRef="Participant_11lkkn6" />
-    <bpmn:messageFlow id="Flow_0yeptmn" sourceRef="Participant_11lkkn6" targetRef="Activity_08tml68" />
+    <bpmn:messageFlow id="Flow_0yeptmn" name="Informacja o wybranych terminach spotkań HR" sourceRef="Participant_11lkkn6" targetRef="Activity_08tml68" />
   </bpmn:collaboration>
   <bpmn:process id="Process_miasi" isExecutable="true">
     <bpmn:sequenceFlow id="Flow_0dhg1c2" sourceRef="Activity_1jq1al5" targetRef="Event_08w1mnh" />
@@ -116,6 +116,9 @@
       <bpmndi:BPMNEdge id="Flow_0yeptmn_di" bpmnElement="Flow_0yeptmn">
         <di:waypoint x="470" y="260" />
         <di:waypoint x="470" y="460" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="479" y="273" width="61" height="53" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
