@@ -1,7 +1,11 @@
 package com.example.workflow;
 
+import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
+import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
+import org.camunda.bpm.engine.impl.jobexecutor.JobExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,13 +23,26 @@ import java.util.stream.Stream;
 
 public class Gather3CV implements JavaDelegate {
 
+
+
     Logger logger = LoggerFactory.getLogger(Gather3CV.class);
-    private final int cv1_arrive_delay = 1;
+    private final int cv1_arrive_delay = 11;
     private final int cv2_arrive_delay = 2;
     private final int cv3_arrive_delay = 3;
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
+
+        ProcessEngine defaultEngine;
+        defaultEngine = ProcessEngines.getDefaultProcessEngine();
+        JobExecutor jobExecutor = ((ProcessEngineConfigurationImpl)defaultEngine.getProcessEngineConfiguration())
+                .getJobExecutor();
+
+        logger.info("Job executor active? " + jobExecutor.isActive());
+        logger.info("Wait time: " + jobExecutor.getWaitTimeInMillis());
+        logger.info("Max jobs per acquisition: " + jobExecutor.getMaxJobsPerAcquisition());
+
+
         TimeUnit.SECONDS.sleep(cv1_arrive_delay);
         delegateExecution.setVariable("candidate_1", "Candidate 1");
         logger.info("CV arrived: Candidate 1");
@@ -37,5 +54,7 @@ public class Gather3CV implements JavaDelegate {
         TimeUnit.SECONDS.sleep(cv3_arrive_delay);
         delegateExecution.setVariable("candidate_3", "Candidate 3");
         logger.info("CV arrived: Candidate 3");
+        delegateExecution.setVariable("CVcount", 0);
+        delegateExecution.setVariable("trialCount", 3);
     }
 }
