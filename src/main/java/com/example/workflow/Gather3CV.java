@@ -17,6 +17,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -30,8 +31,21 @@ public class Gather3CV implements JavaDelegate {
     private final int cv2_arrive_delay = 2;
     private final int cv3_arrive_delay = 3;
 
+    private static int trialCount = 0;
+    int cvLimit = 3;
+
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
+
+        trialCount++;
+        delegateExecution.setVariable("trialCount", trialCount);
+
+        Random random = new Random();
+        int CVcount = random.nextInt(cvLimit - 1) + 1;
+        delegateExecution.setVariable("CVcount", CVcount);
+
+        logger.info("Próba: ", trialCount);
+        logger.info("Liczba zebranych CV: ", CVcount);
 
         ProcessEngine defaultEngine;
         defaultEngine = ProcessEngines.getDefaultProcessEngine();
